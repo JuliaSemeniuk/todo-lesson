@@ -1,4 +1,4 @@
-import { removeTodoFromSStorage } from "./sessionStorage";
+import { removeTodoFromSStorage, getTodosFromSStorage } from "./sessionStorage";
 
 export const getTodoItem = (text) => {
   // Create Todo Item
@@ -35,6 +35,7 @@ function removeTodoItem(todoItem) {
     todoItem.addEventListener("transitionend", function () {
       removeTodoFromSStorage(todoItem);
       todoItem.remove();
+      toggleDisableTodoSelect();
     });
   };
 }
@@ -44,4 +45,17 @@ function toggleCheckButton(todoItem) {
     e.preventDefault();
     todoItem.classList.toggle("todo-item_completed");
   };
+}
+
+// 1. select should be disabled when no option is displayed
+export function toggleDisableTodoSelect() {
+  let todos = getTodosFromSStorage();
+  console.log("todos: ", todos);
+  const todoSelect = document.querySelector(".todo-select");
+  if (todos.length) {
+    todoSelect.removeAttribute("disabled", "disabled");
+    console.log("todoSelect: ", todoSelect);
+  } else {
+    todoSelect.setAttribute("disabled", "disabled");
+  }
 }

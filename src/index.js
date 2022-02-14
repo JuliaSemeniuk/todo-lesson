@@ -1,7 +1,7 @@
 import "../styles/index.css";
 import "../index.html";
 
-import { getTodoItem } from "./addTodoItem";
+import { getTodoItem, toggleDisableTodoSelect } from "./addTodoItem";
 import { saveTodoToSStorage, getTodosFromSStorage } from "./sessionStorage";
 import { filterTodoItems } from "./filterTodoItems";
 import {
@@ -45,6 +45,8 @@ function addTodo(event) {
   todoList.appendChild(todoItem);
 
   clearTodoInput(todoInputWrapper);
+
+  toggleDisableTodoSelect();
 }
 
 function filterTodos(e) {
@@ -55,6 +57,7 @@ function filterTodos(e) {
 
 // TODO fix bugs:
 // 1. select should be disabled when no option is displayed
+
 // 2. forbid form submit with enter key, when input value is less than 3 characters
 // 3. when todoInput is not in focus, helper text should not be displayed
 // 4. save to session storage todo state: completed, not completed - and update it
