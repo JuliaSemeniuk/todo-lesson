@@ -1,9 +1,16 @@
-import { removeTodoFromSStorage, getTodosFromSStorage } from "./sessionStorage";
+import {
+  removeTodoFromSStorage,
+  getTodosFromSStorage,
+  toggleTodoStatusSStorage,
+} from "./sessionStorage";
 
-export const getTodoItem = (text) => {
+export const getTodoItem = (text, status) => {
   // Create Todo Item
   const todoItem = document.createElement("li");
   todoItem.classList.add("todo-item");
+  if (status === "completed") {
+    todoItem.classList.add("todo-item_completed");
+  }
 
   // Create and add Todo Text
   const todoText = document.createElement("span");
@@ -15,6 +22,7 @@ export const getTodoItem = (text) => {
   const checkButton = document.createElement("button");
   checkButton.innerHTML = '<i class="fas fa-check"></i>';
   checkButton.classList.add("todo-check-button");
+
   checkButton.addEventListener("click", toggleCheckButton(todoItem));
   todoItem.appendChild(checkButton);
 
@@ -44,6 +52,7 @@ function toggleCheckButton(todoItem) {
   return (e) => {
     e.preventDefault();
     todoItem.classList.toggle("todo-item_completed");
+    toggleTodoStatusSStorage(todoItem);
   };
 }
 

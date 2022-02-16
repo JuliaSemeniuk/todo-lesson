@@ -33,8 +33,8 @@ function onDOMLoaded() {
 function renderTodosFromSStorage() {
   let todos = getTodosFromSStorage();
 
-  todos.forEach((todoValue) => {
-    const todoItem = getTodoItem(todoValue);
+  todos.forEach((todo) => {
+    const todoItem = getTodoItem(todo.value, todo.status);
     todoList.appendChild(todoItem);
   });
 }
