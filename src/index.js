@@ -18,6 +18,8 @@ const todoSelect = document.querySelector(".todo-select");
 document.addEventListener("DOMContentLoaded", onDOMLoaded);
 todoInput.addEventListener("input", validateTodoInput);
 todoButton.addEventListener("click", addTodo);
+
+todoInput.addEventListener("keypress", addTodo);
 todoSelect.addEventListener("change", filterTodos);
 
 function onDOMLoaded() {
@@ -37,7 +39,17 @@ function renderTodosFromSStorage() {
 }
 
 function addTodo(event) {
+  if (event.keyCode && event.keyCode !== 13) {
+    return;
+  }
+
   event.preventDefault();
+
+  if (todoInput.value.length < 3) {
+    return;
+  }
+
+  console.log("input value", todoInput.value.length);
 
   saveTodoToSStorage(todoInput.value);
 

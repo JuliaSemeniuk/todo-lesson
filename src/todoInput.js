@@ -13,7 +13,6 @@ export function getTodoInputItems(todoInputWrapper) {
 export function validateTodoInput(todoInputWrapper) {
   const { todoInput, todoHelper, todoButton } =
     getTodoInputItems(todoInputWrapper);
-
   if (todoInput.value.length >= 3) {
     todoButton.classList.remove("todo-button_disabled");
     todoHelper.classList.remove("todo-helper_visible");
