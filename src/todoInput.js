@@ -1,7 +1,7 @@
-export function getTodoInputItems(todoInputWrapper) {
-  const todoInput = todoInputWrapper.querySelector(".todo-input");
-  const todoHelper = todoInputWrapper.querySelector(".todo-helper");
-  const todoButton = todoInputWrapper.querySelector(".todo-button");
+export function getTodoInputItems() {
+  const todoInput = document.querySelector(".todo-input");
+  const todoHelper = document.querySelector(".todo-helper");
+  const todoButton = document.querySelector(".todo-button");
 
   return {
     todoInput,
@@ -10,9 +10,9 @@ export function getTodoInputItems(todoInputWrapper) {
   };
 }
 
-export function validateTodoInput(todoInputWrapper) {
-  const { todoInput, todoHelper, todoButton } =
-    getTodoInputItems(todoInputWrapper);
+export function validateTodoInput() {
+  const { todoInput, todoHelper, todoButton } = getTodoInputItems();
+
   if (todoInput.value.length >= 3) {
     todoButton.classList.remove("todo-button_disabled");
     todoHelper.classList.remove("todo-helper_visible");
@@ -22,9 +22,18 @@ export function validateTodoInput(todoInputWrapper) {
   }
 }
 
-export function clearTodoInput(todoInputWrapper) {
-  const { todoInput, todoHelper, todoButton } =
-    getTodoInputItems(todoInputWrapper);
+export function hideHelperText() {
+  const { todoHelper } = getTodoInputItems();
+  todoHelper.classList.remove("todo-helper_visible");
+}
+
+export function showHelperText() {
+  const { todoHelper } = getTodoInputItems();
+  todoHelper.classList.add("todo-helper_visible");
+}
+
+export function clearTodoInput() {
+  const { todoInput, todoHelper, todoButton } = getTodoInputItems();
 
   todoInput.value = "";
   todoButton.classList.add("todo-button_disabled");

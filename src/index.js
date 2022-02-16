@@ -8,6 +8,8 @@ import {
   clearTodoInput,
   getTodoInputItems,
   validateTodoInput,
+  showHelperText,
+  hideHelperText,
 } from "./todoInput";
 
 const todoInputWrapper = document.querySelector(".todo-input-wrapper");
@@ -17,6 +19,8 @@ const todoSelect = document.querySelector(".todo-select");
 
 document.addEventListener("DOMContentLoaded", onDOMLoaded);
 todoInput.addEventListener("input", validateTodoInput);
+todoInput.addEventListener("focus", showHelperText);
+todoInput.addEventListener("blur", hideHelperText);
 todoButton.addEventListener("click", addTodo);
 
 todoInput.addEventListener("keypress", addTodo);
@@ -24,7 +28,6 @@ todoSelect.addEventListener("change", filterTodos);
 
 function onDOMLoaded() {
   renderTodosFromSStorage();
-  validateTodoInput(todoInputWrapper);
 }
 
 function renderTodosFromSStorage() {
@@ -32,8 +35,6 @@ function renderTodosFromSStorage() {
 
   todos.forEach((todoValue) => {
     const todoItem = getTodoItem(todoValue);
-
-    // Add todo item to list
     todoList.appendChild(todoItem);
   });
 }
@@ -69,7 +70,6 @@ function filterTodos(e) {
 
 // TODO fix bugs:
 // 1. select should be disabled when no option is displayed
-
 // 2. forbid form submit with enter key, when input value is less than 3 characters
 // 3. when todoInput is not in focus, helper text should not be displayed
 // 4. save to session storage todo state: completed, not completed - and update it
